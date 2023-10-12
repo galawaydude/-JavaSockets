@@ -3,10 +3,10 @@ import java.net.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-class ServerMessageListener extends Thread {
+class MessageListener extends Thread {
     private BufferedReader bufferedReader;
 
-    ServerMessageListener(BufferedReader bufferedReader) {
+    MessageListener(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
     }
 
@@ -28,11 +28,11 @@ class ServerMessageListener extends Thread {
     }
 }
 
-class UserMessageSender extends Thread {
+class MessageResponder extends Thread {
     private BufferedWriter bufferedWriter;
     private BlockingQueue<String> messageQueue;
 
-    UserMessageSender(BufferedWriter bufferedWriter, BlockingQueue<String> messageQueue) {
+    MessageResponder(BufferedWriter bufferedWriter, BlockingQueue<String> messageQueue) {
         this.bufferedWriter = bufferedWriter;
         this.messageQueue = messageQueue;
     }
@@ -74,11 +74,11 @@ public class Client {
             bufferedReader = new BufferedReader(inputStreamReader);
             bufferedWriter = new BufferedWriter(outputStreamWriter);
 
-            ServerMessageListener serverMessageListener = new ServerMessageListener(bufferedReader);
-            UserMessageSender userMessageSender = new UserMessageSender(bufferedWriter, messageQueue);
+            MessageListener serverMessageListener = new ServerMessageListener(bufferedReader);
+            MessageSender userMessageSender = new UserMessageSender(bufferedWriter, messageQueue);
 
-            serverMessageListener.start();
-            userMessageSender.start();
+            MessageListener.start();
+            MessageSender.start();
 
             while (true) {
                 BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
@@ -89,7 +89,7 @@ public class Client {
                 }
             }
 
-            userMessageSender.join();
+            MessageSender.join();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
