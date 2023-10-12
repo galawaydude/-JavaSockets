@@ -78,7 +78,7 @@ public class Client {
             MessageSender userMessageSender = new UserMessageSender(bufferedWriter, messageQueue);
 
             MessageListener.start();
-            MessageSender.start();
+            MessageResponder.start();
 
             while (true) {
                 BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
@@ -89,7 +89,7 @@ public class Client {
                 }
             }
 
-            MessageSender.join();
+            MessageResponder.join();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
