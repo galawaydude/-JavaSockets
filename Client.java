@@ -74,8 +74,8 @@ public class Client {
             bufferedReader = new BufferedReader(inputStreamReader);
             bufferedWriter = new BufferedWriter(outputStreamWriter);
 
-            MessageListener serverMessageListener = new ServerMessageListener(bufferedReader);
-            MessageSender userMessageSender = new UserMessageSender(bufferedWriter, messageQueue);
+            MessageListener MessageListener = new MessageListener(bufferedReader);
+            MessageResponder MessageResponder = new MessageResponder(bufferedWriter, messageQueue);
 
             MessageListener.start();
             MessageResponder.start();

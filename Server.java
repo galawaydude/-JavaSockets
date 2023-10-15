@@ -46,7 +46,7 @@ class MessageResponder extends Thread {
                 String msgToClient = messageQueue.take();
 
                 if (!msgToClient.equalsIgnoreCase("BYE")) {
-                    // Acknowledge receipt of the message
+
                     bufferedWriter.write("Server: Message received: " + msgToClient);
                     bufferedWriter.newLine();
                     bufferedWriter.flush();
