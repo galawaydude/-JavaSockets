@@ -1,6 +1,5 @@
 
-JavaSockets is a simple, multi-threaded terminal based client-server chat application built in Java. This repository provides the source code for both the client and server applications, allowing users to establish a socket connection and exchange messages in a chat-like fashion. I've used concepts of sockets along with multithreading and blocking queues to achieve some additional functionality *(Presently this code, works by having the server and the client hosted on the same system i.e. local host)*.
-
+JavaSockets is a simple, rudimentary implementation of a cli based chat application with custom implemented message broker.
   
   
 
